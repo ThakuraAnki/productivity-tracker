@@ -4,34 +4,28 @@ let tasks = [];
 function addTask() {
     let input = document.getElementById("taskInput");
     let taskText = input.value.trim();
-
     if (taskText === "") return;
-
-    // using mdn js do this 
-    document.getElementById("taskInput").addEventListener("keydown", function(event) {
-    if (event.key==="Enter") {
-        addTask();
-    }
-});
-    
-//We remove all extra spaces group of strings and trim in single"" ",
-    const normalized=taskText.replace(/\s+/g, " ").toLowerCase();
-
-    // is any duplicate occurs we simple replace it 
+    const normalized = taskText.replace(/\s+/g, " ").toLowerCase();
     const isDuplicate = tasks.some(task =>
         task.text.replace(/\s+/g, " ").toLowerCase() === normalized
     );
-    // This our checker func to help if already existed don't include and throw alert message.
     if (isDuplicate) {
         alert(`"${taskText}" already exists in your list!`);
         return;
     }
-    //If all test pass then push into tasks.
-
     tasks.push({ text: taskText, done: false });
     input.value = "";
     renderTasks();
 }
+
+// ✅ Register Enter key listener ONCE, outside addTask
+document.getElementById("taskInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        addTask();
+    }
+});
+    
+
 // ➤ Render Tasks
 function renderTasks() {
     let list = document.getElementById("taskList");
