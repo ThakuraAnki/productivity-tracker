@@ -18,11 +18,11 @@ function addTask() {
     renderTasks();
 }
 
-document.getElementById("taskInput").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        addTask();
-    }
-});
+document.getElementById('taskInput')
+  .addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') addTask();
+  });
+
     
 
 // ➤ Render Tasks

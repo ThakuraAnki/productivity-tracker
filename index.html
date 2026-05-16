@@ -21,10 +21,8 @@
         <h1>Stay Productive 🚀</h1>
 
         <div class="task-box">
-          
-        <input type="text" id="taskInput" placeholder="Enter your task">
-        <button onclick="addTask()">Add</button>
-
+          <input type="text" id="taskInput" placeholder="Enter your task"
+  onkeydown="if(event.key === 'Enter') addTask()">
             <button>Add</button>
         </div>
 
