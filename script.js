@@ -6,6 +6,14 @@ function addTask() {
     let taskText = input.value.trim();
 
     if (taskText === "") return;
+
+    // using mdn js do this 
+    document.getElementById("taskInput").addEventListener("keydown", function(event) {
+    if (event.key==="Enter") {
+        addTask();
+    }
+});
+    
 //We remove all extra spaces group of strings and trim in single"" ",
     const normalized=taskText.replace(/\s+/g, " ").toLowerCase();
 
@@ -36,6 +44,7 @@ function renderTasks() {
             ${task.text}
             <button onclick="toggleTask(${index})">✔</button>
             <button onclick="deleteTask(${index})">❌</button>
+           
         `;
 
         if (task.done) {
@@ -97,6 +106,10 @@ function stopTimer() {
     clearInterval(timer);
     timer = null;
 }
+function resetTimer(){
+    timer = null;
+}
+
 
 function updateTime() {
     let hrs = Math.floor(seconds / 3600);
