@@ -18,7 +18,6 @@ function addTask() {
     renderTasks();
 }
 
-// ✅ Register Enter key listener ONCE, outside addTask
 document.getElementById("taskInput").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         addTask();
