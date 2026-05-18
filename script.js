@@ -85,10 +85,8 @@ function updateProgress() {
 // ⏱️ Timer
 let seconds = 0;
 let timer = null;
-
 function startTimer() {
     if (timer !== null) return; // prevent multiple timers
-
     timer = setInterval(() => {
         seconds++;
         updateTime();
@@ -103,14 +101,58 @@ function resetTimer(){
     timer = null;
 }
 
-
 function updateTime() {
     let hrs = Math.floor(seconds / 3600);
     let mins = Math.floor((seconds % 3600) / 60);
     let secs = seconds % 60;
-
     document.getElementById("time").innerText =
         `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
+}
+
+function pad(num) {
+    return num < 10 ? "0" + num : num;
+}
+
+//- 25min
+const POMO_MODES = { focus: 25 * 60, break: 5 * 60 };
+let pomoSeconds = 25 * 60;
+let pomoTotal   = 25 * 60;
+let pomoTimer   = null;
+
+function startPomodoro() {
+    if (pomoTimer !== null) return;
+    pomoTimer = setInterval(() => {
+        if (pomoSeconds <= 0) { stopPomodoro(); return; }
+        pomoSeconds--;
+        updatePomoTime();
+    }, 1000);
+}
+
+function stopPomodoro() {
+    clearInterval(pomoTimer);
+    pomoTimer = null;
+}
+
+function resetPomodoro() {
+    stopPomodoro();
+    pomoSeconds = pomoTotal;
+    updatePomoTime();
+}
+
+function switchMode(mode) {
+    stopPomodoro();
+    pomoTotal   = POMO_MODES[mode];
+    pomoSeconds = POMO_MODES[mode];
+    document.getElementById("pomo-mode").innerText =
+        mode === "focus" ? "Focus session" : "Short break";
+    updatePomoTime();
+}
+
+function updatePomoTime() {
+    let mins = Math.floor(pomoSeconds / 60);
+    let secs = pomoSeconds % 60;
+    document.getElementById("pomodoro-time").innerText =
+        `${pad(mins)}:${pad(secs)}`;
 }
 
 function pad(num) {

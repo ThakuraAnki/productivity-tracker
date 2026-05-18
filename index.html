@@ -32,11 +32,14 @@
          <h3 id="progress">Progress: 0% (0/0 tasks completed)</h3>
 
         <div class="timer">
-            <h2 id="time">00:00:00</h2>
-            <button onclick="startTimer()">Start</button>
-            <button onclick="stopTimer()">Stop</button>
-            <button onclick="resetTimer()">restart</button>
-
+         
+<div id="pomo-mode">Focus session</div>
+<div id="pomodoro-time">25:00</div>
+<button onclick="startPomodoro()">Start</button>
+<button onclick="stopPomodoro()">Stop</button>
+<button onclick="resetPomodoro()">Reset</button>
+<button onclick="switchMode('focus')">Focus (25m)</button>
+<button onclick="switchMode('break')">Break (5m)</button>
         </div>
     </div>
 
